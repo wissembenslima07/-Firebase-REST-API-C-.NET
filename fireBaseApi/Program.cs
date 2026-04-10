@@ -7,15 +7,39 @@ class Program
 {
     static async Task Main()
     {
-        await Update();
+        await Delete();
 
+
+    }
+    static async Task Delete()
+    {
+        var Api = new ApiHandler()
+        {
+            Url = "https://fir-2026-bf25f-default-rtdb.firebaseio.com/Info/Anime/1.json",
+            Method = HttpMethod.Delete,
+            
+           
+        };
+        var response = await Api.SendRequest();
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            Console.WriteLine("Data  Deleted succefuly");
+
+
+        }
+        else
+        {
+            Console.WriteLine($"Error:{response.StatusCode}");
+
+
+        }
 
     }
     static async Task Create()
     {
         var Api = new ApiHandler()
         {
-            Url = "https://fir-2026-bf25f-default-rtdb.firebaseio.com/Info/Anime.json",
+            Url = "https://fir-2026-bf25f-default-rtdb.firebaseio.com/Info/Anime/2.json",
             Method = HttpMethod.Put,
             Body = """
             
@@ -104,7 +128,7 @@ class Program
         var response = await Api.SendRequest();
         if (response.StatusCode == HttpStatusCode.OK)
         {
-            Console.WriteLine("Data  created succefuly");
+            Console.WriteLine("Data  updated succefuly");
 
 
         }

@@ -20,7 +20,7 @@ internal class ApiHandler
         try
         {
             HttpRequestMessage request = new HttpRequestMessage(Method, Url);
-            if (Method != HttpMethod.Get || Method != HttpMethod.Delete)
+            if (Method != HttpMethod.Get && Method != HttpMethod.Delete)
             {
                 StringContent content = new StringContent(Body, Encoding.UTF8, "application/json");
                 request.Content = content;
