@@ -7,8 +7,33 @@ class Program
 {
     static async Task Main()
     {
-        await Delete();
+        await Get();
 
+
+    }
+    static async Task Get()
+    {
+        var Api = new ApiHandler()
+        {
+            Url = "https://fir-2026-bf25f-default-rtdb.firebaseio.com/Info/Anime/2.json",
+            Method = HttpMethod.Get,
+
+
+        };
+        var response = await Api.SendRequest();
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+           string responsebody =await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(responsebody);
+        }
+        else
+        {
+            Console.WriteLine($"Error:{response.StatusCode}");
+
+
+        }
+        Console.ReadKey();
 
     }
     static async Task Delete()
@@ -44,12 +69,12 @@ class Program
             Body = """
             
             {
-                "1":{
+                
                         "Name":"wizou",
                          "Protagonist":"wizou"
 
 
-                        }
+                        
             }
             
             """
